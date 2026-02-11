@@ -287,7 +287,48 @@ DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate
 
 
 
+/*I wrote this   
 
+--i wrote this
+Select SoldAsVacant
+, CASE  when SoldAsVacant = 'Y' or SoldAsVacant = 'Yes' then 'YES'
+		when SoldAsVacant = 'N'  or SoldAsVacant = 'No' then 'NO'
+		else SoldAsVacant
+		END 
+from NashvilleHousing
+
+Update NashvilleHousing
+Set SoldAsVacant = CASE  when SoldAsVacant = 'Y' or SoldAsVacant = 'Yes' then 'YES'
+					when SoldAsVacant = 'N'  or SoldAsVacant = 'No' then 'NO'
+					else SoldAsVacant
+					END 
+
+with RowNumCTE as (
+select *,
+
+	ROW_NUMBER() over (
+	partition by ParcelID,
+				PropertyAddress,
+				SalePrice,
+				SaleDate,
+				LegalReference
+				ORDER by
+					UniqueID
+				) row_num
+
+
+from NashvilleHousing
+
+)
+Select * from RowNumCTE
+where row_num >1
+
+Alter table NashvilleHousing
+Drop column SaleDate -- deleted other columns as well
+
+
+
+*/
 
 
 
