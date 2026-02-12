@@ -1,3 +1,5 @@
+--Learned this from Alex the Analyst's portfolio project
+
 /*
 
 Cleaning Data in SQL Queries
